@@ -1,0 +1,8 @@
+<atmosphere>
+  <driver code="zyxel645r" class="router">
+    <manufacturer code="zyxel">Zyxel</manufacturer>
+    <name>645r</name>
+    <telnet />
+    <snmp version="1" mib="rfc1213" />
+  </driver>
+</atmosphere>
