@@ -1,0 +1,38 @@
+[!Global!]
+IconName=atmosphere
+Comment=ATMOSphere
+
+[infomessage]
+Name=Information message
+Comment=Received an information message
+default_presentation=0
+
+[lowwarningmessage]
+Name=Low warning message
+Comment=Received a low warning message
+default_presentation=0
+
+[warningmessage]
+Name=Warning message
+Comment=Received a warning message
+default_presentation=1
+default_sound=KDE_Beep_Ahem.wav
+
+[alertmessage]
+Name=Alert message
+Comment=Received an alert message
+default_presentation=5
+default_sound=KDE_Error.wav
+default_logfile=atmosphere.txt
+
+[securitymessage]
+name=Security alert message
+Comment=Received a security alert message
+default_presentation=21
+default_sound=KDE_Error.wav
+default_logfile=atmosphere.txt
+
+[invaliddevice]
+name=Invalid device opened
+Comment=Tried to access a device without any kind of support
+default_presentation=2
