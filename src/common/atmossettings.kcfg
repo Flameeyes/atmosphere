@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile xmlns="http://www.kde.org/standards/kcfg/1.0" name="atmosphererc" />
+  <group name="main" >
+    <entry type="Int" name="ReReadDevice" >
+      <label>Interval between two reads of device statistics.</label>
+      <whatsthis>During display of SNMP statistics for a device, re-read the values every tot milliseconds.</whatsthis>
+      <default>30000</default>
+    </entry>
+    <entry type="Int" name="ReReadInterface" >
+      <label>Interval between two reads of interface statistics</label>
+      <whatsthis>During display of SNMP statistics of a device's interface, the values are re-read every tot milliseconds.</whatsthis>
+      <default>3000</default>
+    </entry>
+    <entry type="Bool" name="LogRawEvents" >
+      <label>Show raw events in event log</label>
+      <whatsthis>If this option is enabled, on event log we shows raw-events received from device.</whatsthis>
+      <default>false</default>
+    </entry>
+    <entry type="Bool" name="KeepAliveTelnet" >
+      <label>Keep alive telnet sessions</label>
+      <whatsthis>If this option is enabled, telnet session will be kept alive against timeouts sending a 'version' command every time a disconnection is foreseen by the device.</whatsthis>
+      <default>false</default>
+    </entry>
+    <entry type="StringList" name="ExternalDrivers" >
+      <label>List of out-of-data xml drivers datafile.</label>
+      <whatsthis>By default ATMOSphere loads the drivers found in /share/apps/atmosphere/drivers/*.xml.
+      To load external drivers, you can insert them here, so that they are loaded in any case.</whatsthis>
+    </entry>
+  </group>
+  <group name="monitor" >
+    <entry type="Int" name="MonitorCheckTimeout" >
+      <label>Time between two check of the monitor.</label>
+      <whatsthis>Watch Monitor enquiry devices every tot milliseconds and check if they are up or down.</whatsthis>
+      <default>5000</default>
+    </entry>
+    <entry type="Int" name="MonitorDeadTimeout" >
+      <label>Timeout before declare a device as dead.</label>
+      <whatsthis>Time to wait before declare a device down. If the timeout is greater than that, the device enquired will be declared 'dead'.
+This should be less than the time between two checks.</whatsthis>
+      <default>500</default>
+    </entry>
+  </group>
+</kcfg>
