@@ -1,0 +1,102 @@
+#MIN_CONFIG(3.2)
+
+CXXFLAGS="$CXXFLAGS -fexceptions"
+AC_SUBST(CXXFLAGS)
+
+AM_INIT_AUTOMAKE(atmosphere, 0.1)
+AC_C_BIGENDIAN
+AC_CHECK_KDEMAXPATHLEN
+
+dnl ------------------------------------------------------------------------
+dnl Check for Flameeyes's TFTP library
+dnl ------------------------------------------------------------------------
+dnl
+  AC_ARG_ENABLE(tftp,
+    [  --disable-tftp          Turn off TFTP server support.],
+    [], enable_tftp=yes)
+  
+  if test x"$enable_tftp" = xyes; then
+    AC_MSG_CHECKING(for Flameeyes's TFTP library)
+    cat > tftptest.$ac_ext <<EOF
+#include <tftp/server.h>
+#include <qhostaddress.h>
+
+TFTP::Server s(QHostAddress());
+
+int main()
+{
+}
+
+EOF
+
+    if test x"$TFTP_PREFIX" != "x"; then
+       tftp_libprefix="$TFTP_PREFIX/lib"
+       TFTP_INCLUDE="-I$TFTP_PREFIX/include"
+    fi
+    ac_try="$CXX tftptest.$ac_ext $TFTP_INCLUDE $QT_INCLUDES $QT_LDFLAGS -ltftp -lqt"
+
+    if AC_TRY_EVAL(ac_try) then
+      AC_MSG_RESULT([found])
+      for ltftp in $tftp_libprefix /lib /usr/lib /usr/local/lib; do
+        AC_CHECK_FILE(["$ltftp/libtftp.la"],
+           [TFTP_LIBS="$ltftp/libtftp.la"]
+           AC_DEFINE([HAVE_TFTP],,[Define this if you have TFTP (libtftp) installed]),,)
+      done    
+    else
+       AC_MSG_RESULT([not found, TFTP server support not compiled, file transfer disabled.]);
+    fi
+
+    rm tftptest.*
+  fi
+
+  AC_SUBST(TFTP_LIBS)
+  AC_SUBST(TFTP_INCLUDE)
+
+dnl ------------------------------------------------------------------------
+dnl Check for Flameeyes's KSNMP library
+dnl ------------------------------------------------------------------------
+dnl
+    AC_ARG_WITH(libksnmp,
+        AC_HELP_STRING([--with-libksnmp=PREFIX],[specify location of libksnmp library.]),
+        [ac_cv_libksnmp_prefix=$withval],
+        [ac_cv_libksnmp_prefix=/usr]
+    )
+    
+    AC_MSG_CHECKING(for libksnmp)
+
+    if "x$ac_cv_libksnmp_prefix" == "xno"; then
+      AC_MSG_FAILURE([user disabled.])
+    fi
+
+    for lksnmp in $ac_cv_libksnmp_prefix / /usr /usr/local `kde-config --prefix`; do
+      AC_CHECK_FILE(["$lksnmp/lib/libksnmp.la"],
+         [KSNMP_LIBS="$lksnmp/lib/libksnmp.la"; KSNMP_LIBPATH="$lksnmp/lib"])
+      AC_CHECK_FILE(["$lksnmp/include/libksnmp/session.h"],
+         [KSNMP_INCLUDE="-I$lksnmp/include"])
+    done
+    
+    cat > ksnmptest.$ac_ext <<EOF
+
+#include <libksnmp/session1.h>
+
+KSNMP::Session1 sess("localhost", "public");
+
+int main()
+{
+}
+
+EOF
+    
+    ac_try="$CXX ksnmptest.$ac_ext -DQT_THREAD_SUPPORT $KSNMP_INCLUDE $QT_INCLUDES $QT_LDFLAGS -L$KSNMP_LIBPATH $LIB_KDECORE -lqt-mt -lksnmp"
+
+    if AC_TRY_EVAL(ac_try) then
+      AC_MSG_RESULT([found])
+    else
+       AC_MSG_FAILURE([not found.])
+    fi
+
+    rm ksnmptest.*
+
+  AC_SUBST(KSNMP_LIBS)
+  AC_SUBST(KSNMP_INCLUDE)
+
