@@ -1,0 +1,5 @@
+File=atmossettings.kcfg
+ClassName=ATMOSsettings
+Singleton=true
+GlobalEnums=false
+Mutators=true
