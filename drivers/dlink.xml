@@ -1,0 +1,21 @@
+<atmosphere>
+  <driver code="dsl500" class="router">
+    <manufacturer code="dlink">D-Link</manufacturer>
+    <name>DSL-500</name>
+    <serial />
+    <telnet />
+    <snmp version="1" mib="rfc1213" />
+  </driver>
+  <driver code="dsl300g" class="modem">
+    <manufacturer code="dlink">D-Link</manufacturer>
+    <name>DSL-300g+</name>
+    <serial rj12="rj12" />
+    <telnet />
+    <snmp version="1" mib="rfc1213" />
+  </driver>
+  <driver code="dwl700ap" class="accesspoint">
+    <manufacturer code="dlink">D-Link</manufacturer>
+    <name>DWL-700AP</name>
+    <snmp version="2c" mib="rfc1213" />
+  </driver>
+</atmosphere>
