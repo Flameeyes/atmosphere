@@ -1,0 +1,21 @@
+2004-06-27 Flameeyes <dgp85@users.souceforge.net>
+	Added bandwidth graph to Interface Statistics page.
+	Now the SNMP-related tabs are shown only if SNMP is supported by the device. Similarly, logs are shown only if at least one CLI is supported.
+	Errors in the driver file are now thrown as EInvalidDriver exceptions instead of set the driver itself invalid and then delete it.
+
+2004-06-25 Flameeyes <dgp85@users.sourceforge.net>
+	Added support for non-router devices (modems, access points). 
+	Started shipping drivers with sources, with some D-Link devices I had / I have. 
+
+2004-06-22 Flameeyes <dgp85@users.sourceforge.net>
+	Added support for Exceptions for error handling instead of qFatals. 
+
+2004-06-22 Flameeyes <dgp85@users.sourceforge.net>
+	Removed suffix from devices listings 
+
+2004-06-22 Flameeyes <dgp85@users.sourceforge.net>
+	Added ability to load drivers' XML files from /usr/share/apps/atmosphere/drivers/ or ~/.kde/share/apps/atmosphere/drivers/ without add them manually. 
+
+2004-06-22 Flameeyes <dgp85@users.sourceforge.net>
+	Fixed configure.in.in 
+ 
